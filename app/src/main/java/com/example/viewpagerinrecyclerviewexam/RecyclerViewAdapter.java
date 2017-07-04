@@ -74,7 +74,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 break;
             case TYPE_NORMAL:
                 ItemViewHolder holder2 = (ItemViewHolder) holder;
-                holder2.textView.setText(mStringList.get(position + 1));
+                holder2.textView.setText(mStringList.get(position - 1));
                 break;
         }
     }
