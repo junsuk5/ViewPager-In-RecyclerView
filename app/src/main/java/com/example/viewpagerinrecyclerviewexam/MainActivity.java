@@ -24,12 +24,14 @@ public class MainActivity extends AppCompatActivity {
         fragmentList.add(new ImageFragment());
         fragmentList.add(new ImageFragment());
 
-        List<String> stringList = new ArrayList<>();
+
+        List<Item> items = new ArrayList<>();
+        items.add(new Item<>(fragmentList));
         for (int i = 0; i < 30; i++) {
-            stringList.add("item");
+            items.add(new Item<>("item"));
         }
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getSupportFragmentManager(), fragmentList, stringList);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getSupportFragmentManager(), items);
         recyclerView.setAdapter(adapter);
     }
 }

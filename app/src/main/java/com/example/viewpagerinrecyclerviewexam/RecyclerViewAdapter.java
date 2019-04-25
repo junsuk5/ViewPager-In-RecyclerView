@@ -20,14 +20,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public static final int TYPE_PAGER = 0;
     public static final int TYPE_NORMAL = 1;
 
-    private final FragmentManager mFragementManager;
-    private List<Fragment> mFragmentList;
-    private List<String> mStringList;
+    private final FragmentManager mFragmentManager;
+    private List<Item> mItems;
 
-    public RecyclerViewAdapter(FragmentManager fm, List<Fragment> fragmentList, List<String> stringList) {
-        mFragementManager = fm;
-        mFragmentList = fragmentList;
-        mStringList = stringList;
+    public RecyclerViewAdapter(FragmentManager fm, List<Item> items) {
+        mFragmentManager = fm;
+        mItems = items;
     }
 
     static class PagerViewHolder extends RecyclerView.ViewHolder {
@@ -68,19 +66,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case TYPE_PAGER:
+                List<Fragment> item = (List<Fragment>) mItems.get(position).getItem();
                 PagerViewHolder holder1 = (PagerViewHolder) holder;
-                ViewPagerAdapter adapter = new ViewPagerAdapter(mFragementManager, mFragmentList);
+                ViewPagerAdapter adapter = new ViewPagerAdapter(mFragmentManager,item);
                 holder1.viewPager.setAdapter(adapter);
                 break;
             case TYPE_NORMAL:
+                String item1 = (String) mItems.get(position).getItem();
                 ItemViewHolder holder2 = (ItemViewHolder) holder;
-                holder2.textView.setText(mStringList.get(position - 1));
+                holder2.textView.setText(item1);
                 break;
         }
     }
 
     @Override
     public int getItemCount() {
-        return mStringList.size() + 1;
+        return mItems.size();
     }
 }
